@@ -1,0 +1,5 @@
+key,doi,system,subsystem,source,extract,x,x_units,y,y_units,file,name,description_short,description_long
+Torre_etal2019,10.1098/rsos.191023,language,English,Buckeye corpus,script,breath group,words,words,characters,1.csv,BG_word_characters,Words in breath groups.,A dataset containing the average word size (in characters) of breath groups.
+Torre_etal2019,10.1098/rsos.191023,language,English,Buckeye corpus,script,breath group,words,words,phonemes,2.csv,BG_word_phonemes,Words in breath groups.,A dataset containing the average word size (in phonemes) of breath groups.
+Torre_etal2019,10.1098/rsos.191023,language,English,Buckeye corpus,script,breath group,words,words,seconds,3.csv,BG_word_time,Words in breath groups.,A dataset containing the average word size (in seconds) of breath groups.
+,,,,,manual,,,,key,,,,
