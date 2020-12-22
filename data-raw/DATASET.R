@@ -4,6 +4,23 @@ library(reticulate)
 #source_python("data-raw/extract.py")
 metadata <- read_csv("data-raw/metadata.csv")
 
+doc_and_data <- function(dataset_name, data_title, description, itemX, itemX_units, itemY, itemY_units, key, dataset){
+  data_documentation <- glue( '#\' [data_title]\n#\'\n',
+                              '#\' [description]\n#\'\n',
+                              '#\' @format A data frame with [nrow(dataset)] rows and 2 variables:\n',
+                              '#\' \\describe{\n',
+                              '#\'   \\item{[itemX]}{[itemX], in [itemX_units]}\n',
+                              '#\'   \\item{[itemY]}{[itemY], in [itemY_units]}\n',
+                              '#\' }\n',
+                              '#\' @source [key]\n',
+                              '"[dataset_name]"',
+                              .open="[", .close="]")
+  docr_file <- file(glue("R/{dataset_name}.R"), "w")
+  writeLines(data_documentation, con = docr_file)
+  close(docr_file)
+  save(dataset, file = glue("data/{dataset_name}.rda"))
+}
+
 for(row in 1:nrow(metadata)){
   file_name = paste0("data-raw/",pull(metadata[row,"file"]))
   dataset_name = pull(metadata[row,"name"])
@@ -16,23 +33,6 @@ for(row in 1:nrow(metadata)){
     itemY_units = pull(metadata[row,"y_units"])
     key = pull(metadata[row,"key"])
     print(dataset_name)
-    assign(dataset_name,read_csv(file_name))
-    # Update data documentation
-    data_documentation <- glue( '#\' [data_title]\n#\'\n',
-                                '#\' [description]\n#\'\n',
-                                '#\' @format A data frame with [nrow(get(dataset_name))] rows and 2 variables:\n',
-                                '#\' \\describe{\n',
-                                '#\'   \\item{[itemX]}{[itemX], in [itemX_units]}\n',
-                                '#\'   \\item{[itemY]}{[itemY], in [itemY_units]}\n',
-                                '#\' }\n',
-                                '#\' @source [key]\n',
-                                '"[dataset_name]"',
-                                .open="[", .close="]")
-    docr_file <- file(glue("R/{dataset_name}.R"), "w")
-    writeLines(data_documentation, con = docr_file)
-    close(docr_file)
-    save(dataset_name, file = glue("data/{dataset_name}.rda"))
-    usethis::use_data(dataset_name, overwrite = TRUE)
+    doc_and_data(dataset_name, data_title, description, itemX, itemX_units, itemY, itemY_units, key, read_csv(file_name))
   }
 }
-
