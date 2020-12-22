@@ -26,19 +26,19 @@ get_parameters <- function(x){
 }
 
 #' @export
-fit.menzerath <- function(x,...){
-  fit <- lm(log(x$y) ~ log(x$x) + x$x, as.data.frame(x=x$x, y = x$y, stringsAsFactors=FALSE),...)
+fit.menzerath <- function(object, ...){
+  fit <- lm(log(object$y) ~ log(object$x) + object$x, as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...)
 }
 
 
 #' @export
-predict.menzerath <- function(x,...){
-  predict(fit(x), interval = "confidence")
+predict.menzerath <- function(object, ...){
+  predict(fit(object), interval = "confidence", ...)
 }
 
 
 #' @export
-print.menzerath <- function(x){
+print.menzerath <- function(x, ...){
   glue('Observations: {length(x$x)}\n',
        'y: {paste(head(x$y), collapse=",")}...\n',
        'x: {paste(head(x$x), collapse=",")}...')
