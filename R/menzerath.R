@@ -17,7 +17,7 @@ generics::fit
 #' @export
 #'
 get_parameters <- function(x){
-  if(!class(x) == "lm"){
+  if(!is(x,"lm")){
     stop("Expecting an lm fit")
   }
   list(a = exp(summary(x)$coefficients[1]),
@@ -56,7 +56,6 @@ plot.menzerath <- function(x, fit = NULL, ...){
     predict_fit <- predict(x)
     p + geom_ribbon(aes(ymin=predict_fit[,"lwr"], ymax=predict_fit[,"upr"]), alpha=0.1, color="red") +
       geom_line(aes(y=predict_fit[,"fit"]))
-  }else if(all(class(fit)==c("matrix", "array"))){
     p + geom_ribbon(aes(ymin=fit[,"lwr"], ymax=fit[,"upr"]), alpha=0.1, color="red") +
       geom_line(aes(y=fit[,"fit"]))
   }
