@@ -1,38 +1,30 @@
 library(tidyverse)
 library(glue)
+library(magrittr)
 library(reticulate)
 #source_python("data-raw/extract.py")
+
+# Save .rds objects
 metadata <- read_csv("data-raw/metadata.csv")
+datasets_list <- lapply(paste0("data-raw/",metadata$file), read_csv)
 
-doc_and_data <- function(dataset_name, data_title, description, itemX, itemX_units, itemY, itemY_units, key, dataset){
-  data_documentation <- glue( '#\' [data_title]\n#\'\n',
-                              '#\' [description]\n#\'\n',
-                              '#\' @format A data frame with [nrow(dataset)] rows and 2 variables:\n',
-                              '#\' \\describe{\n',
-                              '#\'   \\item{[itemX]}{[itemX], in [itemX_units]}\n',
-                              '#\'   \\item{[itemY]}{[itemY], in [itemY_units]}\n',
-                              '#\' }\n',
-                              '#\' @source [key]\n',
-                              '"[dataset_name]"',
-                              .open="[", .close="]")
-  docr_file <- file(glue("R/{dataset_name}.R"), "w")
-  writeLines(data_documentation, con = docr_file)
-  close(docr_file)
-  save(dataset, file = glue("data/{dataset_name}.rda"))
+for(i in 1:length(datasets_list)){
+  assign(metadata$name[i], datasets_list[[i]])
+  save(list = metadata$name[i], file = paste0("data/",metadata$name[i],".rda"))
 }
 
-for(row in 1:nrow(metadata)){
-  file_name = paste0("data-raw/",pull(metadata[row,"file"]))
-  dataset_name = pull(metadata[row,"name"])
-  if(file.exists(file_name)){
-    data_title = pull(metadata[row,"description_short"])
-    description = pull(metadata[row,"description_long"])
-    itemX = pull(metadata[row,"x"])
-    itemX_units = pull(metadata[row,"x_units"])
-    itemY = pull(metadata[row,"y"])
-    itemY_units = pull(metadata[row,"y_units"])
-    key = pull(metadata[row,"key"])
-    print(dataset_name)
-    doc_and_data(dataset_name, data_title, description, itemX, itemX_units, itemY, itemY_units, key, read_csv(file_name))
-  }
-}
+# Create object documentation
+metadata$rows  <- sapply(datasets_list, nrow)
+metadata %<>%
+  mutate(data_documentation = glue('#\' [description_short]\n#\'\n',
+                                      '#\' [description_long]\n#\'\n',
+                                      '#\' @format A data frame with [rows] rows and 2 variables:\n',
+                                      '#\' \\describe{\n',
+                                      '#\'   \\item{[x]}{[x], in [x_units]}\n',
+                                      '#\'   \\item{[y]}{[y], in [y_units]}\n',
+                                      '#\' }\n',
+                                      '#\' @source [key]\n',
+                                      '"[name]"\n\n',
+                                      .open="[", .close="]"))
+mapply(cat, metadata$data_documentation, file = paste0("R/", metadata$name, ".R"))
+
