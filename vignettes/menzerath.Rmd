@@ -1,0 +1,86 @@
+---
+title: "Introduction to package menzerath"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+The menzerath package is used to describe fit and plot data following the Menzerath's law. Menzerath's law (also known as Menzerath-Altmann law) was initially formulated as a linguistic law describing the relationship between the size of a linguistic construct and its constituents. Consider for example the relationship between the size of a word and its syllables. According to Menzerath's law the expected relationship should follow the relationship:
+
+
+
+## Installation
+
+The package can be installed from github in R by running the following commands:
+
+```{r, installation, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sellisd/menzerath")
+```
+
+## Usage
+
+To demonstrate how to use the package we are going to analyze a classic dataset originally used by Altman 1980 in the mathematical formulation of the Menzerath-Altmann law. The dataset relates the word size, measured in terms of number of syllables to the average syllable size in the word. The size of syllables is measured in terms of number of phonemes.
+
+First we load the library and have a look at the dataset
+
+```{r}
+library(menzerath)
+data(morpheme_syllable)
+morpheme_syllable
+```
+We can transform the table to a menzerath object and create a plot:
+
+```{r}
+ms <- menzerath(morpheme_syllable)
+plot(ms)
+```
+
+Then estimate the parameters of the law:
+
+```{r}
+fit_menzerath <- fit(ms)
+print(fit_menzerath)
+```
+As a linear fit is performed on log scale in order to get the estimated parameters the coefficients have to be transformed. This is facilitated by the `get_parameters` function:
+
+```{r}
+get_parameters(fit_menzerath)
+```
+The fit can also be visualized with a ribbon plot:
+
+```{r}
+plot(ms, fit=TRUE)
+```
+
+## Datasets
+
+In the `menzerath` package a number of datasets are included in the form of tibbles that can easily be loaded and manipulated to serve as examples or test data. There are some classic datasets from Altmann 1980 and some more recent ones from Torre et al. 2019 
+
+### Datasets in package
+
+- `morpheme_syllable`: Dataset from Altmann 1980 linking morpheme size and syllable size.
+- `word_syllable_phoneme`: Dataset from Altman 1980 on syllable length in English words.
+- `word_syllable_time`: Dataset from Altman 1980 on syllable length in Bachka-German words.
+- `BG_word_characters`: Dataset from Torre et al. 2019 linking breadth group size and average word size (in number of characters).
+- `BG_word_phonemes`: Dataset from Torre et al. 2019 linking breadth group and average word size (in phonemes).
+- `BG_word_time`: Dataset from Torre et al. 2019 linking breadth group and word size (in seconds).
+
+Further documentation and details about each dataset can be gained with the `help` command, e.g:
+
+```
+help(morpheme_syllable)
+```
+
+## References
