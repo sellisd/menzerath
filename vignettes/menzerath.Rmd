@@ -2,7 +2,7 @@
 title: "Introduction to package menzerath"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{Introduction to package menzerath}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,8 +16,10 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-The menzerath package is used to describe fit and plot data following the Menzerath's law. Menzerath's law (also known as Menzerath-Altmann law) was initially formulated as a linguistic law describing the relationship between the size of a linguistic construct and its constituents. Consider for example the relationship between the size of a word and its syllables. According to Menzerath's law the expected relationship should follow the relationship:
+The menzerath package is used to describe fit and plot data following the Menzerath's law. Menzerath's law (also known as Menzerath-Altmann law) was initially formulated as a linguistic law describing the relationship between the size of a linguistic construct and its constituents. Consider for example the relationship between the size of a word (`y`) and its syllables (`x`). According to Menzerath's law the expected relationship should follow the relationship:
 
+$$ y = a \cdot x^b \cdot e^{-cx} $$
+where `a`, `b` and `c` are parameters of the law.
 
 
 ## Installation
@@ -63,6 +65,11 @@ The fit can also be visualized with a ribbon plot:
 ```{r}
 plot(ms, fit=TRUE)
 ```
+We can now repeat the same analysis in a more recent and larger dataset (Torre et al., 2019). The `BG_word_time` dataset contains the relationship between the size of breath groups and average word size (in seconds). Breath groups are defined by pauses (e.g. for breathing) during speech.
+
+```{r}
+BG_word_time
+```
 
 ## Datasets
 
@@ -79,8 +86,12 @@ In the `menzerath` package a number of datasets are included in the form of tibb
 
 Further documentation and details about each dataset can be gained with the `help` command, e.g:
 
-```
+```{r}
 help(morpheme_syllable)
 ```
 
 ## References
+
+Altmann, G., 1980. Prolegomena to Menzerath’s law. Glottometrika, 2(2), pp.1-10.
+
+Torre Iván G., Luque Bartolo, Lacasa Lucas, Kello Christopher T. and Hernández-Fernández Antoni 2019 On the physical origin of linguistic laws and lognormality in speech R. Soc. open sci.6191023 http://doi.org/10.1098/rsos.191023
