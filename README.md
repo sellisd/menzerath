@@ -56,7 +56,7 @@ ms <- menzerath(morpheme_syllable)
 plot(ms)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-plot_morpheme_syllable-1.png" width="100%" />
 
 Then estimate the parameters of the law:
 
@@ -95,8 +95,8 @@ The fit can also be visualized with a ribbon plot:
 plot(ms, fit=TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" /> We
-can now repeat the same analysis in a more recent and larger dataset
+<img src="man/figures/README-morpheme_syllable_plot-1.png" width="100%" />
+We can now repeat the same analysis in a more recent and larger dataset
 (Torre et al., 2019). The `BG_word_time` dataset contains the
 relationship between the size of breath groups and average word size (in
 seconds). Breath groups are defined by pauses (e.g. for breathing)
@@ -119,6 +119,13 @@ BG_word_time
 #> 10     7 0.309
 #> # … with 45,024 more rows
 ```
+
+``` r
+BG_word_time_menzerath = menzerath(BG_word_time)
+plot(BG_word_time_menzerath, fit=TRUE)
+```
+
+<img src="man/figures/README-BG_word_time_plot-1.png" width="100%" />
 
 ## Datasets
 

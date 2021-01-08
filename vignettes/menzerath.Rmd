@@ -37,38 +37,43 @@ To demonstrate how to use the package we are going to analyze a classic dataset 
 
 First we load the library and have a look at the dataset
 
-```{r}
+```{r, load}
 library(menzerath)
 data(morpheme_syllable)
 morpheme_syllable
 ```
 We can transform the table to a menzerath object and create a plot:
 
-```{r}
+```{r, plot_morpheme_syllable}
 ms <- menzerath(morpheme_syllable)
 plot(ms)
 ```
 
 Then estimate the parameters of the law:
 
-```{r}
+```{r, morpheme_syllable_fit}
 fit_menzerath <- fit(ms)
 print(fit_menzerath)
 ```
 As a linear fit is performed on log scale in order to get the estimated parameters the coefficients have to be transformed. This is facilitated by the `get_parameters` function:
 
-```{r}
+```{r, get_parameters}
 get_parameters(fit_menzerath)
 ```
 The fit can also be visualized with a ribbon plot:
 
-```{r}
+```{r, morpheme_syllable_plot}
 plot(ms, fit=TRUE)
 ```
 We can now repeat the same analysis in a more recent and larger dataset (Torre et al., 2019). The `BG_word_time` dataset contains the relationship between the size of breath groups and average word size (in seconds). Breath groups are defined by pauses (e.g. for breathing) during speech.
 
-```{r}
+```{r, BG_word_time}
 BG_word_time
+```
+
+```{r, BG_word_time_plot}
+BG_word_time_menzerath = menzerath(BG_word_time)
+plot(BG_word_time_menzerath, fit=TRUE)
 ```
 
 ## Datasets
