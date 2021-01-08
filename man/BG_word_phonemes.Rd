@@ -7,8 +7,8 @@
 \format{
 A data frame with 45034 rows and 2 variables:
 \describe{
-  \item{breath group}{breath group, in words}
-  \item{words}{words, in phonemes}
+  \item{x}{breath group, in words}
+  \item{y}{words, in phonemes}
 }
 }
 \source{

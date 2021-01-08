@@ -7,8 +7,8 @@
 \format{
 A data frame with 5 rows and 2 variables:
 \describe{
-  \item{word}{word, in syllable}
-  \item{syllable}{syllable, in milliseconds}
+  \item{x}{word, in syllable}
+  \item{y}{syllable, in milliseconds}
 }
 }
 \source{
