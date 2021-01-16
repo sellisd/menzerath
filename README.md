@@ -165,3 +165,9 @@ Torre Iván G., Luque Bartolo, Lacasa Lucas, Kello Christopher T. and
 Hernández-Fernández Antoni 2019 On the physical origin of linguistic
 laws and lognormality in speech R. Soc. open sci.6191023
 <http://doi.org/10.1098/rsos.191023>
+
+## Contributing
+
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.
