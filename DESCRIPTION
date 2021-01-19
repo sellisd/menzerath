@@ -11,6 +11,10 @@ LazyData: true
 RoxygenNote: 7.1.1
 Imports:
     generics,
+    glue,
+    tibble,
+    stats,
+    methods,
     ggplot2
 Depends: 
     R (>= 3.5.0)

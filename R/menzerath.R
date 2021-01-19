@@ -1,34 +1,92 @@
-library(generics)
-
+#' @importFrom glue glue
+#' @importFrom tibble is_tibble tibble
+#' @importFrom stats lm predict
+#' @importFrom methods is
 #' @importFrom generics fit
 #' @export
 generics::fit
 
+#' Density function for Menzerath-Altmann law
+#'
+#' @param x          single number or numeric vector
+#' @param method     one of MAL (default), simplified_1, simplified_2, Milicka_1, Milicka_2, Milicka_4, Milicka_8
+#' @param parameters named vector for parameters a, b and c
+#'
+#' @return single number or numeric vector
+#' @export
+dmenzerath <- function(x, parameters, method = "MAL"){
+    switch(method,
+           "MAL" = parameters['a']*x^parameters['b']*exp(-parameters['c']*x),
+           "simplified_1" = parameters['a']*exp(-parameters['c']*x),
+           "simplified_2" = parameters['a']*x^parameters['b'],
+           "Milicka_1" = parameters['a']*x^(-parameters['b'])*exp(parameters['c']*x),
+           "Milicka_2" = parameters['a']*x^(-parameters['b']),
+           "Milicka_4" = parameters['a'] + parameters['b']/x,
+           "Milicka_8" = parameters['a'] + parameters['b']/x + parameters['c']*min(1, x-1)/x,
+           stop(paste("Unknown method:", method))
+    )
+}
+
 #' Return parameters of the Menzerath-Altmann law.
 #'
-#'  The parameters of equation \eqn{y = a \cdot x^b \cdot e^{-cx}} are
-#'  estimated after taking logs
-#'  \eqn{log(y) = log(a) + b \cdot log(x) - c \cdot x}}
+#'  The parameters are estimated after taking logs
 #'
 #' @param x An object with class lm
 #'
 #' @return named list with a, b and c
 #' @export
-#'
 get_parameters <- function(x){
   if(!is(x,"lm")){
     stop("Expecting an lm fit")
   }
-  list(a = exp(summary(x)$coefficients[1]),
-       b = summary(x)$coefficients[2],
-       c = -summary(x)$coefficients[3])
+  if(is(x, "MAL")){
+    return(list(a = exp(summary(x)$coefficients[1]),
+                b = summary(x)$coefficients[2],
+                c = -summary(x)$coefficients[3]))
+  }else if(is(x, "simplified_1")){
+    return(list(a = exp(summary(x)$coefficients[1]),
+                c = -summary(x)$coefficients[2]))
+  }else if(is(x, "simplified_2")){
+    return(list(a = exp(summary(x)$coefficients[1]),
+                b = summary(x)$coefficients[2]))
+  }else if(is(x, "Milicka_1")){
+    return(list(a = exp(summary(x)$coefficients[1]),
+                b = -summary(x)$coefficients[2],
+                c = summary(x)$coefficients[3]))
+  }else if(is(x, "Milicka_2")){
+    return(list(a = exp(summary(x)$coefficients[1]),
+                b = -summary(x)$coefficients[2]))
+  }else if(is(x, "Milicka_4")){
+    stop("unimplemented")
+  }else if(is(x, "Milicka_8")){
+    stop("unimplemented")
+  }else{
+    stop(paste("Unknown fitted method for an object of class menzerath: ", class(x)))
+  }
 }
 
+#' Fit a menzerath object
+#'
+#' @param object
+#'
+#' @param method string Method to perform the fitting, could be one of MAL, simplified_1, simplified_2, Milicka_1, Milicka_2, Milicka_4 or Milicka_8
+#' @param ...
+#'
 #' @export
-fit.menzerath <- function(object, ...){
-  fit <- lm(log(object$y) ~ log(object$x) + object$x, as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...)
+fit.menzerath <- function(object, method="MAL",...){
+  result <- switch(method,
+         "MAL" = lm(log(object$y) ~ log(object$x) + object$x, as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...),
+         "simplified_1" = lm(log(object$y) ~ object$x, as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...),
+         "simplified_2" = lm(log(object$y) ~ log(object$x), as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...),
+         "Milicka_1" = lm(log(object$y) ~ log(object$x) + object$x, as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...),
+         "Milicka_2" = lm(log(object$y) ~ log(object$x), as.data.frame(x=object$x, y = object$y, stringsAsFactors=FALSE), ...),
+         "Milicka_4" = stop("unimplemented"),
+         "Milicka_8" = stop("unimplemented"),
+         stop(paste("Unknown method: ", method))
+  )
+  class(result) <- c(method, class(result))
+  result
 }
-
 
 #' @export
 predict.menzerath <- function(object, ...){
@@ -63,9 +121,14 @@ plot.menzerath <- function(x, fit = NULL, ...){
 }
 
 
+#' A class to describe and plot data following the Menzerath-Altman law
+#'
+#' @param x Average size of construct at level Ln
+#' @param y Size of construct at level Ln-1
+#'
 #' @export
 menzerath <- function(tb=tibble(), x = "x", y = "y"){
-  # A class to data following the Menzerath-Altman law
+
   if(!tibble::is_tibble(tb)){
     stop("Constructor expects a tibble")
   }
