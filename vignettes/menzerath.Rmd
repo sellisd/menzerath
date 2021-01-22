@@ -113,6 +113,21 @@ tibble(method = rep(menzerath_methods, times=rep(length(morpheme_length_vector),
 ggplot(aes(x=morpheme_length, y = mean_syllable_length, color = method)) + geom_line()
 ```
 
+More interesting is to use these alternative models to estimate the parameters from real data. We can do so using Altmann's data (Altman 1980) on syllable length of indonesian morphemes: 
+
+```{r, alternative_models_fit}
+library(cowplot)
+library(latex2exp)
+ms <- menzerath(morpheme_syllable)
+MAL_plot <- plot(ms, fit=TRUE, method="MAL")
+simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1")
+simplified_2_plot <- plot(ms, fit=TRUE, method="simplified_2")
+Milicka_1_plot <- plot(ms, fit=TRUE, method="Milicka_1")
+Milicka_2_plot <- plot(ms, fit=TRUE, method="Milicka_2")
+plot_grid(MAL_plot, simplified_1_plot, simplified_2_plot ,Milicka_1_plot, Milicka_2_plot, ncols = 3)
+```
+
+
 ## Datasets
 
 In the `menzerath` package a number of datasets are included in the form of tibbles that can easily be loaded and manipulated to serve as examples or test data. There are some classic datasets from Altmann 1980 and some more recent ones from Torre et al. 2019 

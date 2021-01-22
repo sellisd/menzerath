@@ -89,8 +89,8 @@ fit.menzerath <- function(object, method="MAL",...){
 }
 
 #' @export
-predict.menzerath <- function(object, ...){
-  predict(fit.menzerath(object), interval = "confidence", ...)
+predict.menzerath <- function(object, method="MAL", ...){
+  predict(fit.menzerath(object, method), interval = "confidence", ...)
 }
 
 
@@ -102,7 +102,7 @@ print.menzerath <- function(x, ...){
 }
 
 #' @export
-plot.menzerath <- function(x, fit = NULL, ...){
+plot.menzerath <- function(x, fit = NULL, method="MAL", ...){
   p <- (ggplot2::ggplot(data = x, ggplot2::aes(x=log(x), y=log(y))) +
           ggplot2::geom_point(...))
   if(is.null(fit)){
@@ -110,7 +110,7 @@ plot.menzerath <- function(x, fit = NULL, ...){
     p
   }else if(isTRUE(fit)){
     # fit and then plot
-    predict_fit <- predict.menzerath(x)
+    predict_fit <- predict.menzerath(x, method)
     p + ggplot2::geom_ribbon(ggplot2::aes(ymin=predict_fit[,"lwr"], ymax=predict_fit[,"upr"]), alpha=0.1, fill="blue") +
       ggplot2::geom_line(ggplot2::aes(y=predict_fit[,"fit"]))
     p + ggplot2::geom_ribbon(ggplot2::aes(ymin=predict_fit[,"lwr"], ymax=predict_fit[,"upr"]), alpha=0.1, fill="blue") +

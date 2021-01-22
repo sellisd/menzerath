@@ -182,6 +182,26 @@ ggplot(aes(x=morpheme_length, y = mean_syllable_length, color = method)) + geom_
 
 <img src="man/figures/README-alternative_models-1.png" width="100%" />
 
+More interesting is to use these alternative models to estimate the
+parameters from real data. We can do so using Altmann’s data (Altman
+1980) on syllable length of indonesian morphemes:
+
+``` r
+library(cowplot)
+library(latex2exp)
+ms <- menzerath(morpheme_syllable)
+MAL_plot <- plot(ms, fit=TRUE, method="MAL")
+simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1")
+simplified_2_plot <- plot(ms, fit=TRUE, method="simplified_2")
+Milicka_1_plot <- plot(ms, fit=TRUE, method="Milicka_1")
+Milicka_2_plot <- plot(ms, fit=TRUE, method="Milicka_2")
+plot_grid(MAL_plot, simplified_1_plot, simplified_2_plot ,Milicka_1_plot, Milicka_2_plot, ncols = 3)
+#> Warning in as_grob.default(plot): Cannot convert object of class numeric into a
+#> grob.
+```
+
+<img src="man/figures/README-alternative_models_fit-1.png" width="100%" />
+
 ## Datasets
 
 In the `menzerath` package a number of datasets are included in the form
