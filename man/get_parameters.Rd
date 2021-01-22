@@ -13,5 +13,5 @@ get_parameters(x)
 named list with a, b and c
 }
 \description{
-
+The parameters are estimated after taking logs
 }

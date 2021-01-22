@@ -10,8 +10,8 @@ the Menzerath’s law. Menzerath’s law (also known as Menzerath-Altmann
 law) was initially formulated as a linguistic law describing the
 relationship between the size of a linguistic construct and its
 constituents. Consider for example the relationship between the size of
-a word (`y`) and its syllables (`x`). According to Menzerath’s law the
-expected relationship should follow the relationship:
+a word (`y`) and its syllables (`x`). According to Menzerath’s law in
+its standard formulation the expected relationship should follow:
 
 \[ y = a \cdot x^b \cdot e^{-cx} \] where `a`, `b` and `c` are
 parameters of the law.
@@ -28,6 +28,8 @@ devtools::install_github("sellisd/menzerath")
 
 ## Usage
 
+### Basic Usage
+
 To demonstrate how to use the package we are going to analyze a classic
 dataset originally used by Altman 1980 in the mathematical formulation
 of the Menzerath-Altmann law. The dataset relates the word size,
@@ -38,15 +40,26 @@ phonemes.
 First we load the library and have a look at the dataset
 
 ``` r
+library(tidyverse)
+#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+#> ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+#> ✓ tibble  3.0.5     ✓ dplyr   1.0.3
+#> ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+#> ✓ readr   1.4.0     ✓ forcats 0.5.0
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
 library(menzerath)
 data(morpheme_syllable)
 morpheme_syllable
-#>   x    y
-#> 1 1 3.10
-#> 2 2 2.53
-#> 3 3 2.29
-#> 4 4 2.12
-#> 5 5 2.09
+#> # A tibble: 5 x 2
+#>       x     y
+#>   <dbl> <dbl>
+#> 1     1  3.1 
+#> 2     2  2.53
+#> 3     3  2.29
+#> 4     4  2.12
+#> 5     5  2.09
 ```
 
 We can transform the table to a menzerath object and create a plot:
@@ -127,6 +140,67 @@ plot(BG_word_time_menzerath, fit=TRUE)
 
 <img src="man/figures/README-BG_word_time_plot-1.png" width="100%" />
 
+### Alternative models
+
+Different mathematical formulations of Menzerath’s law have been
+proposed.
+
+| method name   | equation                                                           | parameters                | reference    |
+| ------------- | ------------------------------------------------------------------ | ------------------------- | ------------ |
+| simplified\_1 | \(y = ae^{-cx}\)                                                   | a, c                      | Altmann 1980 |
+| simplified\_2 | \(y = ax^b\)                                                       | a, b                      | Altmann 1980 |
+| MAL           | \(y = ax^be^{-cx}\)                                                | a, b, c                   | Altmann 1980 |
+| Milicka\_1    | \(L_{n-1} = a_nL_n^{-b_n}e^{c_nL_n}\)                              | \(a_n\), \(b_n\), \(c_n\) | Milicka 2014 |
+| Milicka\_2    | \(L_{n-1} = a_nL_n^{-b_n}\)                                        | \(a_n\), \(b_n\)          | Milicka 2014 |
+| Milicka\_4    | \(L_{n-1} = a_n + \frac{b_n}{L_n}\)                                | \(a_n\), \(b_n\)          | Milicka 2014 |
+| Milicka\_8    | \(L_{n-1} = a_n + \frac{b_n}{L_n} + \frac{c_n\min(1,L_n-1)}{L_n}\) | \(a_n\), \(b_n\), \(c_n\) | Milicka 2014 |
+
+Note that methods Milicka\_1 and Milicka\_2 are identical to the
+classical Menzerath-Altman formulation (MAL) and simplified\_2
+correspondingly. The only difference besides notation is the parameter
+sign so \(b=-b_n\) and \(c=-c_n\).
+
+In the classic example of syllable length of Indonesian morphemes Altman
+estimated a = 2.9603, b = -0.36853 and c = 0.04764. Using the same
+parameter estimates we can draw the expected form of the law with the
+different methods.
+
+``` r
+morpheme_length_vector <- c(1,2,3,4,5)
+parameters = c(a=2.9603, b=-0.36853, c=0.04764)
+menzerath_methods <- c("simplified_1", "simplified_2", "MAL", "Milicka_1", "Milicka_2", "Milicka_4", "Milicka_8")
+
+mean_syllable_length_vector <- numeric(0)
+for(i in c(1:length(menzerath_methods))){
+  mean_syllable_length_vector <- c(mean_syllable_length_vector, dmenzerath(morpheme_length_vector,parameters=parameters, method=menzerath_methods[i]))
+}
+tibble(method = rep(menzerath_methods, times=rep(length(morpheme_length_vector),length(menzerath_methods))),
+       morpheme_length = rep(morpheme_length_vector, length(menzerath_methods)),
+       mean_syllable_length = mean_syllable_length_vector) %>% 
+ggplot(aes(x=morpheme_length, y = mean_syllable_length, color = method)) + geom_line()
+```
+
+<img src="man/figures/README-alternative_models-1.png" width="100%" />
+
+More interesting is to use these alternative models to estimate the
+parameters from real data. We can do so using Altmann’s data (Altman
+1980) on syllable length of indonesian morphemes:
+
+``` r
+library(cowplot)
+ms <- menzerath(morpheme_syllable)
+MAL_plot <- plot(ms, fit=TRUE, method="MAL")
+simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1")
+simplified_2_plot <- plot(ms, fit=TRUE, method="simplified_2")
+Milicka_1_plot <- plot(ms, fit=TRUE, method="Milicka_1")
+Milicka_2_plot <- plot(ms, fit=TRUE, method="Milicka_2")
+plot_grid(MAL_plot, simplified_1_plot, simplified_2_plot ,Milicka_1_plot, Milicka_2_plot, ncols = 3)
+#> Warning in as_grob.default(plot): Cannot convert object of class numeric into a
+#> grob.
+```
+
+<img src="man/figures/README-alternative_models_fit-1.png" width="100%" />
+
 ## Datasets
 
 In the `menzerath` package a number of datasets are included in the form
@@ -165,6 +239,10 @@ Torre Iván G., Luque Bartolo, Lacasa Lucas, Kello Christopher T. and
 Hernández-Fernández Antoni 2019 On the physical origin of linguistic
 laws and lognormality in speech R. Soc. open sci.6191023
 <http://doi.org/10.1098/rsos.191023>
+
+Milička, Jiří. (2014). Menzerath’s Law: The Whole is Greater than the
+Sum of its Parts. Journal of Quantitative Linguistics. 21.
+10.1080/09296174.2014.882187.
 
 ## Contributing
 
