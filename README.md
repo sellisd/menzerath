@@ -188,7 +188,6 @@ parameters from real data. We can do so using Altmann’s data (Altman
 
 ``` r
 library(cowplot)
-library(latex2exp)
 ms <- menzerath(morpheme_syllable)
 MAL_plot <- plot(ms, fit=TRUE, method="MAL")
 simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1")

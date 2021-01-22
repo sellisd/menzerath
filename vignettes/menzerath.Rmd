@@ -117,7 +117,6 @@ More interesting is to use these alternative models to estimate the parameters f
 
 ```{r, alternative_models_fit}
 library(cowplot)
-library(latex2exp)
 ms <- menzerath(morpheme_syllable)
 MAL_plot <- plot(ms, fit=TRUE, method="MAL")
 simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1")
