@@ -189,14 +189,12 @@ parameters from real data. We can do so using Altmann’s data (Altman
 ``` r
 library(cowplot)
 ms <- menzerath(morpheme_syllable)
-MAL_plot <- plot(ms, fit=TRUE, method="MAL")
-simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1")
-simplified_2_plot <- plot(ms, fit=TRUE, method="simplified_2")
-Milicka_1_plot <- plot(ms, fit=TRUE, method="Milicka_1")
-Milicka_2_plot <- plot(ms, fit=TRUE, method="Milicka_2")
-plot_grid(MAL_plot, simplified_1_plot, simplified_2_plot ,Milicka_1_plot, Milicka_2_plot, ncols = 3)
-#> Warning in as_grob.default(plot): Cannot convert object of class numeric into a
-#> grob.
+MAL_plot <- plot(ms, fit=TRUE, method="MAL") + ggtitle("MAL")
+simplified_1_plot <- plot(ms, fit=TRUE, method="simplified_1") + ggtitle("simplified_1")
+simplified_2_plot <- plot(ms, fit=TRUE, method="simplified_2") + ggtitle("simplified_2")
+Milicka_1_plot <- plot(ms, fit=TRUE, method="Milicka_1") + ggtitle("Milicka_1")
+Milicka_2_plot <- plot(ms, fit=TRUE, method="Milicka_2") + ggtitle("Milicka_2")
+plot_grid(MAL_plot, simplified_1_plot, simplified_2_plot ,Milicka_1_plot, Milicka_2_plot, ncol = 3)
 ```
 
 <img src="man/figures/README-alternative_models_fit-1.png" width="100%" />

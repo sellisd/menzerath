@@ -21,4 +21,5 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown
+    cowplot
 VignetteBuilder: knitr
