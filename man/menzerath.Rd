@@ -7,9 +7,9 @@
 menzerath(tb = tibble(), x = "x", y = "y")
 }
 \arguments{
-\item{x}{Average size of construct at level Ln}
+\item{x}{Average size of a construct (L_n) measured in units of its direct constituents}
 
-\item{y}{Size of construct at level Ln-1}
+\item{y}{Size of the constituent (L_{n-1})measured in its direct subconstituents}
 }
 \description{
 A class to describe and plot data following the Menzerath-Altman law

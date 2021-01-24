@@ -123,8 +123,8 @@ plot.menzerath <- function(x, fit = NULL, method="MAL", ...){
 
 #' A class to describe and plot data following the Menzerath-Altman law
 #'
-#' @param x Average size of construct at level Ln
-#' @param y Size of construct at level Ln-1
+#' @param x Average size of a construct (L_n) measured in units of its direct constituents
+#' @param y Size of the constituent (L_{n-1})measured in its direct subconstituents
 #'
 #' @export
 menzerath <- function(tb=tibble(), x = "x", y = "y"){
