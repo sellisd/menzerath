@@ -20,6 +20,6 @@ Depends:
     R (>= 3.5.0)
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
     cowplot
 VignetteBuilder: knitr
