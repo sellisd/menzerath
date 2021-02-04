@@ -24,3 +24,5 @@ Suggests:
     cowplot,
     tidyverse
 VignetteBuilder: knitr
+URL: https://github.com/sellisd/menzerath
+BugReports: https://github.com/sellisd/menzerath/issues
