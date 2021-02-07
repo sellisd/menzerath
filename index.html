@@ -49,6 +49,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/menzerath_biology.html">Menzerath's law in biology</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -75,7 +87,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>The menzerath package is used to describe fit and plot data following the Menzerath’s law. Menzerath’s law (also known as Menzerath-Altmann law) was initially formulated as a linguistic law describing the relationship between the size of a linguistic construct and its constituents. Consider for example the relationship between the size of a word (<code>y</code>) and its syllables (<code>x</code>). According to Menzerath’s law in its standard formulation the expected relationship should follow:</p>
+<p>The <a href="https://sellisd.github.io/menzerath/">menzerath package</a> is used to describe fit and plot data following the Menzerath’s law. Menzerath’s law (also known as Menzerath-Altmann law) was initially formulated as a linguistic law describing the relationship between the size of a linguistic construct and its constituents. Consider for example the relationship between the size of a word (<code>y</code>) and its syllables (<code>x</code>). According to Menzerath’s law in its standard formulation the expected relationship should follow:</p>
 <p><br><span class="math display"><em>y</em> = <em>a</em> ⋅ <em>x</em><sup><em>b</em></sup> ⋅ <em>e</em><sup> − <em>c</em><em>x</em></sup></span><br> where <code>a</code>, <code>b</code> and <code>c</code> are parameters of the law.</p>
 </div>
 <div id="installation" class="section level2">
@@ -84,7 +96,8 @@
 <p>The package can be installed from github in R by running the following commands:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sellisd/menzerath"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sellisd/menzerath"</span>, build_vignettes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>the <code>build_vignettes=TRUE</code> can be omitted but then the vignettes will not be installed.</p>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -98,7 +111,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</span>
 <span class="co">#&gt; ✓ ggplot2 3.3.3     ✓ purrr   0.3.4</span>
-<span class="co">#&gt; ✓ tibble  3.0.5     ✓ dplyr   1.0.3</span>
+<span class="co">#&gt; ✓ tibble  3.0.6     ✓ dplyr   1.0.3</span>
 <span class="co">#&gt; ✓ tidyr   1.1.2     ✓ stringr 1.4.0</span>
 <span class="co">#&gt; ✓ readr   1.4.0     ✓ forcats 0.5.0</span>
 <span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
@@ -327,7 +340,7 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Diamantis Sellis <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Diamantis Sellis <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4059-5507" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 

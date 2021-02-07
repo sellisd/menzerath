@@ -3,7 +3,8 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   menzerath: menzerath.html
-last_built: 2021-02-04T20:02Z
+  menzerath_biology: menzerath_biology.html
+last_built: 2021-02-07T17:38Z
 urls:
   reference: https://sellisd.github.io/menzerath//reference
   article: https://sellisd.github.io/menzerath//articles
