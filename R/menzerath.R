@@ -140,3 +140,7 @@ menzerath <- function(tb=tibble(), x = "x", y = "y"){
             class = c("menzerath", class(m)))
 }
 
+#' @export
+nobs.menzerath <- function(object, ...){
+  length(object$x)
+}
