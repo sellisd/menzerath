@@ -22,7 +22,9 @@ Suggests:
     knitr,
     rmarkdown,
     cowplot,
-    tidyverse
+    tidyverse,
+    kableExtra,
+    biomaRt
 VignetteBuilder: knitr
 URL: https://github.com/sellisd/menzerath
 BugReports: https://github.com/sellisd/menzerath/issues
