@@ -28,8 +28,10 @@ The package can be installed from github in R by running the following commands:
 
 ```{r, installation, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("sellisd/menzerath")
+devtools::install_github("sellisd/menzerath", build_vignettes=TRUE)
 ```
+
+the `build_vignettes=TRUE` can be omitted but then the vignettes will not be installed.
 
 ## Usage
 
