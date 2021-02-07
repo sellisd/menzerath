@@ -5,13 +5,14 @@
 
 ## Introduction
 
-The menzerath package is used to describe fit and plot data following
-the Menzerath’s law. Menzerath’s law (also known as Menzerath-Altmann
-law) was initially formulated as a linguistic law describing the
-relationship between the size of a linguistic construct and its
-constituents. Consider for example the relationship between the size of
-a word (`y`) and its syllables (`x`). According to Menzerath’s law in
-its standard formulation the expected relationship should follow:
+The [menzerath package](https://sellisd.github.io/menzerath/) is used to
+describe fit and plot data following the Menzerath’s law. Menzerath’s
+law (also known as Menzerath-Altmann law) was initially formulated as a
+linguistic law describing the relationship between the size of a
+linguistic construct and its constituents. Consider for example the
+relationship between the size of a word (`y`) and its syllables (`x`).
+According to Menzerath’s law in its standard formulation the expected
+relationship should follow:
 
 \[ y = a \cdot x^b \cdot e^{-cx} \] where `a`, `b` and `c` are
 parameters of the law.

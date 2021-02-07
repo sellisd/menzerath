@@ -31,7 +31,7 @@ Menzerath's law has been found in a number of different biological sequences and
 - Genes, exons and base pairs [@Li2011] and perhaps more appropriately transcripts, exons and base pairs [@Nikolaou2014]
 - Proteins, protein domains and aminoacids [@Shahzad2015]
 
-To facilitate the exploration of Menzerath's law we can use the menzerath R package. Lets consider the case of the transcript-exon level as an example. We use [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to give us access to the the biological data. The package is part of [Bioconductor](bioconductor.org) and provides an interface to BioMart databases such as [Ensemble](https://www.ensembl.org/), where we can download structural information for a number of genomes.
+To facilitate the exploration of Menzerath's law we can use the [menzerath R package](https://sellisd.github.io/menzerath/). Lets consider the case of the transcript-exon level as an example. We use [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to give us access to the the biological data. The package is part of [Bioconductor](bioconductor.org) and provides an interface to BioMart databases such as [Ensemble](https://www.ensembl.org/), where we can download structural information for a number of genomes.
 
 
 First we have to load the packages we are going to use (If any of the packages is missing check the [Install Missing Libraries section](#Install-missing-libraries-section)):
