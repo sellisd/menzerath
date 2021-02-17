@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sellisd/menzerath)
+
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
