@@ -13,4 +13,4 @@ RUN R -e 'install.packages("devtools")'
 
 RUN R -e 'install.packages("Rcpp")'
 
-RUN apt install clang
+RUN apt-get install clang
