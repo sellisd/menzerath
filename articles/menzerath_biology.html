@@ -114,7 +114,6 @@
 <p>Once everything is in place we can start by connecting to <a href="https://www.ensembl.org/index.html">ensemble</a>, a genome database project of the European Bioinformatics Institute, and list the databases (here are the first 20):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ensembl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biomaRt/man/useMart.html">useMart</a></span><span class="op">(</span><span class="st">"ensembl"</span><span class="op">)</span>
-<span class="co">#&gt; Ensembl site unresponsive, trying uswest mirror</span>
 <span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biomaRt/man/listDatasets.html">listDatasets</a></span><span class="op">(</span><span class="va">ensembl</span><span class="op">)</span>
 <span class="fu">kbl</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">datasets</span>,<span class="fl">20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
