@@ -11,6 +11,7 @@ License: GPL-3
 LazyData: true
 RoxygenNote: 7.1.1
 Imports:
+    Rcpp
     generics,
     glue,
     tibble,
@@ -30,3 +31,4 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/sellisd/menzerath
 BugReports: https://github.com/sellisd/menzerath/issues
+LinkingTo: Rcpp
