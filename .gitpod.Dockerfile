@@ -15,3 +15,6 @@ RUN R -e 'install.packages("Rcpp")'
 
 RUN apt-get update \
   && apt-get install -y clang
+
+RUN R -e 'install.packages("devtools")'
+RUN R -r 'devtools::install_github("sellisd/menzerath", type="source")'
