@@ -144,3 +144,17 @@ menzerath <- function(tb=tibble(), x = "x", y = "y"){
 nobs.menzerath <- function(object, ...){
   length(object$x)
 }
+
+count <- function(text = "",
+                  construct_delimiter = '+',
+                  constituent_delimiter = ' ',
+                  subconstituent_delimiter = '*',
+                  discontinued_constituent_delimiter_begin = '{',
+                  discontinued_constituent_delimiter_end = '}'){
+  mz <- new(Menzerath,text = text,
+                      construct_delimiter = '+',
+                      constituent_delimiter = ' ',
+                      subconstituent_delimiter = '*',
+                      discontinued_constituent_delimiter_begin = '{',
+                      discontinued_constituent_delimiter_end = '}')
+}

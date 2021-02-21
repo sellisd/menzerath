@@ -5,6 +5,10 @@
 
 using namespace Rcpp;
 
+//' @name Menzerath
+//' @title Rcpp class for processing annotated text
+//'
+//'
 class Menzerath
 {
 public:
@@ -84,13 +88,6 @@ private:
   }
 };
 
-int main()
-{
-  Menzerath myMenz = Menzerath();
-  myMenz.calculate_menzerath();
-  myMenz.print_values();
-  return 0;
-}
 
 RCPP_MODULE(m_module) {
   class_<Menzerath>("text_menzerath")
