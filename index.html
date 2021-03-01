@@ -91,7 +91,7 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>The <a href="https://sellisd.github.io/menzerath/">menzerath package</a> is used to describe fit and plot data following the Menzerath’s law. Menzerath’s law (also known as Menzerath-Altmann law) was initially formulated as a linguistic law describing the relationship between the size of a linguistic construct and its constituents. Consider for example the relationship between the size of a word (<code>y</code>) and its syllables (<code>x</code>). According to Menzerath’s law in its standard formulation the expected relationship should follow:</p>
-<p><br><span class="math display"><em>y</em> = <em>a</em> ⋅ <em>x</em><sup><em>b</em></sup> ⋅ <em>e</em><sup> − <em>c</em><em>x</em></sup></span><br> where <code>a</code>, <code>b</code> and <code>c</code> are parameters of the law.</p>
+<p><em>y</em> = <em>a</em> ⋅ <em>x</em><sup><em>b</em></sup> ⋅ <em>e</em><sup> − *c**x*</sup> where <code>a</code>, <code>b</code> and <code>c</code> are parameters of the law.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -114,9 +114,9 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</span>
 <span class="co">#&gt; ✓ ggplot2 3.3.3     ✓ purrr   0.3.4</span>
-<span class="co">#&gt; ✓ tibble  3.0.6     ✓ dplyr   1.0.3</span>
+<span class="co">#&gt; ✓ tibble  3.1.0     ✓ dplyr   1.0.4</span>
 <span class="co">#&gt; ✓ tidyr   1.1.2     ✓ stringr 1.4.0</span>
-<span class="co">#&gt; ✓ readr   1.4.0     ✓ forcats 0.5.0</span>
+<span class="co">#&gt; ✓ readr   1.4.0     ✓ forcats 0.5.1</span>
 <span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
 <span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
 <span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
@@ -190,10 +190,10 @@
 <p>Different mathematical formulations of Menzerath’s law have been proposed.</p>
 <table class="table">
 <colgroup>
-<col width="11%">
-<col width="56%">
-<col width="21%">
-<col width="10%">
+<col width="6%">
+<col width="61%">
+<col width="25%">
+<col width="6%">
 </colgroup>
 <thead><tr class="header">
 <th>method name</th>
@@ -204,57 +204,66 @@
 <tbody>
 <tr class="odd">
 <td>simplified_1</td>
-<td><span class="math inline"><em>y</em> = <em>a</em><em>e</em><sup> − <em>c</em><em>x</em></sup></span></td>
+<td>
+<em>y</em> = <em>a<strong>e<em><sup> − </sup></em>c</strong>x</em>
+</td>
 <td>a, c</td>
 <td>Altmann 1980</td>
 </tr>
 <tr class="even">
 <td>simplified_2</td>
-<td><span class="math inline"><em>y</em> = <em>a</em><em>x</em><sup><em>b</em></sup></span></td>
+<td>
+<em>y</em> = *a**x<em><sup></sup></em>b*</td>
 <td>a, b</td>
 <td>Altmann 1980</td>
 </tr>
 <tr class="odd">
 <td>MAL</td>
-<td><span class="math inline"><em>y</em> = <em>a</em><em>x</em><sup><em>b</em></sup><em>e</em><sup> − <em>c</em><em>x</em></sup></span></td>
+<td>
+<em>y</em> = <em>a<strong>x<em><sup></sup></em>b<em></em>e<em><sup> − </sup></em>c</strong>x</em>
+</td>
 <td>a, b, c</td>
 <td>Altmann 1980</td>
 </tr>
 <tr class="even">
 <td>Milicka_1</td>
-<td><span class="math inline"><em>L</em><sub><em>n</em> − 1</sub> = <em>a</em><sub><em>n</em></sub><em>L</em><sub><em>n</em></sub><sup> − <em>b</em><sub><em>n</em></sub></sup><em>e</em><sup><em>c</em><sub><em>n</em></sub><em>L</em><sub><em>n</em></sub></sup></span></td>
 <td>
-<span class="math inline"><em>a</em><sub><em>n</em></sub></span>, <span class="math inline"><em>b</em><sub><em>n</em></sub></span>, <span class="math inline"><em>c</em><sub><em>n</em></sub></span>
+<em>L</em><sub><em>n</em> − 1</sub> = <em>a</em><sub><em>n</em></sub><em>L</em><sub><em>n</em></sub><sup> − <em>b</em><sub><em>n</em></sub></sup><em>e</em><sup><em>c</em><sub><em>n</em></sub><em>L</em><sub><em>n</em></sub></sup>
+</td>
+<td>
+<em>a</em><sub><em>n</em></sub>, <em>b</em><sub><em>n</em></sub>, <em>c</em><sub><em>n</em></sub>
 </td>
 <td>Milicka 2014</td>
 </tr>
 <tr class="odd">
 <td>Milicka_2</td>
-<td><span class="math inline"><em>L</em><sub><em>n</em> − 1</sub> = <em>a</em><sub><em>n</em></sub><em>L</em><sub><em>n</em></sub><sup> − <em>b</em><sub><em>n</em></sub></sup></span></td>
 <td>
-<span class="math inline"><em>a</em><sub><em>n</em></sub></span>, <span class="math inline"><em>b</em><sub><em>n</em></sub></span>
+<em>L</em><sub><em>n</em> − 1</sub> = <em>a</em><sub><em>n</em></sub><em>L</em><sub><em>n</em></sub><sup> − <em>b</em><sub><em>n</em></sub></sup>
+</td>
+<td>
+<em>a</em><sub><em>n</em></sub>, <em>b</em><sub><em>n</em></sub>
 </td>
 <td>Milicka 2014</td>
 </tr>
 <tr class="even">
 <td>Milicka_4</td>
-<td><span class="math inline">$L_{n-1} = a_n + \frac{b_n}{L_n}$</span></td>
+<td><span class="math inline">$L\_{n-1} = a\_n + \\frac{b\_n}{L\_n}$</span></td>
 <td>
-<span class="math inline"><em>a</em><sub><em>n</em></sub></span>, <span class="math inline"><em>b</em><sub><em>n</em></sub></span>
+<em>a</em><sub><em>n</em></sub>, <em>b</em><sub><em>n</em></sub>
 </td>
 <td>Milicka 2014</td>
 </tr>
 <tr class="odd">
 <td>Milicka_8</td>
-<td><span class="math inline">$L_{n-1} = a_n + \frac{b_n}{L_n} + \frac{c_n\min(1,L_n-1)}{L_n}$</span></td>
+<td><span class="math inline">$L\_{n-1} = a\_n + \\frac{b\_n}{L\_n} + \\frac{c\_n\\min(1,L\_n-1)}{L\_n}$</span></td>
 <td>
-<span class="math inline"><em>a</em><sub><em>n</em></sub></span>, <span class="math inline"><em>b</em><sub><em>n</em></sub></span>, <span class="math inline"><em>c</em><sub><em>n</em></sub></span>
+<em>a</em><sub><em>n</em></sub>, <em>b</em><sub><em>n</em></sub>, <em>c</em><sub><em>n</em></sub>
 </td>
 <td>Milicka 2014</td>
 </tr>
 </tbody>
 </table>
-<p>Note that methods Milicka_1 and Milicka_2 are identical to the classical Menzerath-Altman formulation (MAL) and simplified_2 correspondingly. The only difference besides notation is the parameter sign so <span class="math inline"><em>b</em> =  − <em>b</em><sub><em>n</em></sub></span> and <span class="math inline"><em>c</em> =  − <em>c</em><sub><em>n</em></sub></span>.</p>
+<p>Note that methods Milicka_1 and Milicka_2 are identical to the classical Menzerath-Altman formulation (MAL) and simplified_2 correspondingly. The only difference besides notation is the parameter sign so <em>b</em> =  − <em>b</em><sub><em>n</em></sub> and <em>c</em> =  − <em>c</em><sub><em>n</em></sub>.</p>
 <p>In the classic example of syllable length of Indonesian morphemes Altman estimated a = 2.9603, b = -0.36853 and c = 0.04764. Using the same parameter estimates we can draw the expected form of the law with the different methods.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">morpheme_length_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
@@ -352,6 +361,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://gitpod.io/#https://github.com/sellisd/menzerath"><img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod ready-to-code"></a></li>
+<li><a href="https://github.com/sellisd/menzerath/actions"><img src="https://github.com/sellisd/menzerath/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 </div>
