@@ -1,7 +1,7 @@
 Package: menzerath
 Type: Package
 Title: Explore data following the Menzerath-Altmann law
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Diamantis", "Sellis", email = "sellisd@gmail.com",
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-4059-5507"))
@@ -27,8 +27,10 @@ Suggests:
     cowplot,
     tidyverse,
     kableExtra,
-    biomaRt
+    biomaRt,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 URL: https://github.com/sellisd/menzerath
 BugReports: https://github.com/sellisd/menzerath/issues
 LinkingTo: Rcpp
+Config/testthat/edition: 3

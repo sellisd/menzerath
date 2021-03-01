@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(kableExtra)
+library(dplyr)
 ```
 
 ## Introduction
@@ -128,6 +130,31 @@ Milicka_2_plot <- plot(ms, fit=TRUE, method="Milicka_2") + ggtitle("Milicka_2")
 plot_grid(MAL_plot, simplified_1_plot, simplified_2_plot ,Milicka_1_plot, Milicka_2_plot, ncol = 3)
 ```
 
+### Processing annotated text
+
+We can use the `menzerath` package to process text that has been manually annotated. Lets assume that we are interested in the levels of clause, word and syllable. To measure Menzerath's law we manually annotate the text of interest by placing symbols in the end of each construct, constituent and subconstruct. Lets use the following text as an example:
+
+>Greece, which is the most beautiful country I know, was the first place we visited in Europe.
+
+ We use as delimiters of words a space character (' '), as delimiters of syllables the star character ('*') and as delimiters of clauses the plus sign ('+').
+
+
+```{r, process_text}
+annotated_text <- paste0("Greece* {which* is* the* most* beau*ti*ful* coun*try*",
+                         " +I* know* +}was* the* first* place* +we* vi*si*ted* in*",
+                         "Eu*ro*pe* +.")
+counts_df <- process_text(annotated_text, "+", " ", "*", "{", "}")
+kbl(counts_df)
+```
+
+The `process_text` function calculates the number of constituents and subconstituents per construct, while allowing for the possibility of discontinued constructs (e.g. here a clause that is interrupted by another clause). With this information we can now perform the statistical analyses, first by calculating the average number of subconstituents per construct:
+
+```{r, plot_processed_text}
+mz <- (counts_df %>%
+  mutate(average_subconstituents = subconstituents/constituents))
+mz <- menzerath(mz,x="constituents", y = "average_subconstituents")
+plot(mz, fit = TRUE)
+```
 
 ## Datasets
 
