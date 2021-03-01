@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">menzerath</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -79,7 +79,8 @@
 
       
 
-      </header><script src="menzerath_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="menzerath_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="menzerath_files/kePrint-0.0.1/kePrint.js"></script><link href="menzerath_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to package menzerath</h1>
@@ -119,12 +120,13 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</span>
 <span class="co">#&gt; ✔ ggplot2 3.3.3     ✔ purrr   0.3.4</span>
-<span class="co">#&gt; ✔ tibble  3.0.6     ✔ dplyr   1.0.4</span>
-<span class="co">#&gt; ✔ tidyr   1.1.2     ✔ stringr 1.4.0</span>
-<span class="co">#&gt; ✔ readr   1.4.0     ✔ forcats 0.5.1</span>
+<span class="co">#&gt; ✔ tibble  3.1.0     ✔ stringr 1.4.0</span>
+<span class="co">#&gt; ✔ tidyr   1.1.2     ✔ forcats 0.5.1</span>
+<span class="co">#&gt; ✔ readr   1.4.0</span>
 <span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
-<span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span>
-<span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span>
+<span class="co">#&gt; ✖ dplyr::filter()     masks stats::filter()</span>
+<span class="co">#&gt; ✖ dplyr::group_rows() masks kableExtra::group_rows()</span>
+<span class="co">#&gt; ✖ dplyr::lag()        masks stats::lag()</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sellisd/menzerath">menzerath</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">morpheme_syllable</span><span class="op">)</span>
 <span class="va">morpheme_syllable</span>
@@ -287,6 +289,87 @@
 <span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">MAL_plot</span>, <span class="va">simplified_1_plot</span>, <span class="va">simplified_2_plot</span> ,<span class="va">Milicka_1_plot</span>, <span class="va">Milicka_2_plot</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="menzerath_files/figure-html/alternative_models_fit-1.png" width="700"></p>
 </div>
+<div id="processing-annotated-text" class="section level3">
+<h3 class="hasAnchor">
+<a href="#processing-annotated-text" class="anchor"></a>Processing annotated text</h3>
+<p>We can use the <code>menzerath</code> package to process text that has been manually annotated. Lets assume that we are interested in the levels of clause, word and syllable. To measure Menzerath’s law we manually annotate the text of interest by placing symbols in the end of each construct, constituent and subconstruct. Lets use the following text as an example:</p>
+<blockquote>
+<p>Greece, which is the most beautiful country I know, was the first place we visited in Europe.</p>
+</blockquote>
+<p>We use as delimiters of words a space character (’ ‘), as delimiters of syllables the star character (’*‘) and as delimiters of clauses the plus sign (’+’).</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">annotated_text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Greece* {which* is* the* most* beau*ti*ful* coun*try*"</span>,
+                         <span class="st">" +I* know* +}was* the* first* place* +we* vi*si*ted* in*"</span>,
+                         <span class="st">"Eu*ro*pe* +."</span><span class="op">)</span>
+<span class="va">counts_df</span> <span class="op">&lt;-</span> <span class="fu">process_text</span><span class="op">(</span><span class="va">annotated_text</span>, <span class="st">"+"</span>, <span class="st">" "</span>, <span class="st">"*"</span>, <span class="st">"{"</span>, <span class="st">"}"</span><span class="op">)</span>
+<span class="fu">kbl</span><span class="op">(</span><span class="va">counts_df</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:right;">
+constituents
+</th>
+<th style="text-align:right;">
+subconstituents
+</th>
+<th style="text-align:left;">
+constructs
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+which* is* the* most* beau<em>ti</em>ful* coun<em>try</em> +
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+I* know* +
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Greece* {was* the* first* place* +
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+we* vi<em>si</em>ted* in<em>Eu</em>ro<em>pe</em> +
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>process_text</code> function calculates the number of constituents and subconstituents per construct, while allowing for the possibility of discontinued constructs (e.g. here a clause that is interrupted by another clause). With this information we can now perform the statistical analyses, first by calculating the average number of subconstituents per construct:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mz</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">counts_df</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>average_subconstituents <span class="op">=</span> <span class="va">subconstituents</span><span class="op">/</span><span class="va">constituents</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/menzerath.html">menzerath</a></span><span class="op">(</span><span class="va">mz</span>,x<span class="op">=</span><span class="st">"constituents"</span>, y <span class="op">=</span> <span class="st">"average_subconstituents"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mz</span>, fit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="menzerath_files/figure-html/plot_processed_text-1.png" width="700"></p>
+</div>
 </div>
 <div id="datasets" class="section level2">
 <h2 class="hasAnchor">
@@ -310,7 +393,7 @@
 <code>BG_word_time</code>: Dataset from Torre et al. 2019 linking breadth group and word size (in seconds).</li>
 </ul>
 <p>Further documentation and details about each dataset can be gained with the <code>help</code> command, e.g:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span><span class="va">morpheme_syllable</span><span class="op">)</span></code></pre></div>
 </div>
 </div>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">menzerath</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -356,6 +356,8 @@ fBetSpl5.2
 <p>The information we are interested in are transcripts and exons. Transcripts are uniquely identified by the attribute <code>ensembl_transcript_id</code> and exons by the attribute <code>ensembl_exon_id</code>. We also need the size of exons (in base pairs) and this we can calculate from the difference in the genomic coordinates of the start and end of each exon stored in the attributes <code>exon_chrom_start</code> and <code>exon_chrom_end</code> respectively. Finally we can reduce the noise in the data we download by excluding non-constitutive exons. To keep the amount of data manageable we also filter by a single chromosome:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ensembl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biomaRt/man/useMart.html">useMart</a></span><span class="op">(</span><span class="st">"ensembl"</span>, dataset <span class="op">=</span> <span class="st">"btaurus_gene_ensembl"</span><span class="op">)</span>
+<span class="co">#&gt; Ensembl site unresponsive, trying uswest mirror</span>
+<span class="co">#&gt; Ensembl site unresponsive, trying useast mirror</span>
 <span class="va">cow_exons</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/biomaRt/man/getBM.html">getBM</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="st">'chromosome_name'</span>,
                     values <span class="op">=</span> <span class="fl">13</span>,
                     attributes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ensembl_transcript_id"</span>,
