@@ -128,9 +128,12 @@ plot.menzerath <- function(x, fit = NULL, method="MAL", ...){
 #'
 #' @export
 menzerath <- function(tb=tibble(), x = "x", y = "y"){
-
   if(!tibble::is_tibble(tb)){
-    stop("Constructor expects a tibble")
+    if(is.data.frame(tb)){
+      tb <- tibble::as_tibble(tb)
+    }else{
+      stop("Constructor expects a tibble")
+    }
   }
   m <- tb[c(x, y)]
   names(m) <- c("x","y")
@@ -143,18 +146,4 @@ menzerath <- function(tb=tibble(), x = "x", y = "y"){
 #' @export
 nobs.menzerath <- function(object, ...){
   length(object$x)
-}
-
-count <- function(text = "",
-                  construct_delimiter = '+',
-                  constituent_delimiter = ' ',
-                  subconstituent_delimiter = '*',
-                  discontinued_constituent_delimiter_begin = '{',
-                  discontinued_constituent_delimiter_end = '}'){
-  mz <- new(Menzerath,text = text,
-                      construct_delimiter = '+',
-                      constituent_delimiter = ' ',
-                      subconstituent_delimiter = '*',
-                      discontinued_constituent_delimiter_begin = '{',
-                      discontinued_constituent_delimiter_end = '}')
 }
