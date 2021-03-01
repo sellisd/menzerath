@@ -1,5 +1,10 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sellisd/menzerath)
 
+<!-- badges: start -->
+
+[![Gitpod
+ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sellisd/menzerath)
+[![R-CMD-check](https://github.com/sellisd/menzerath/workflows/R-CMD-check/badge.svg)](https://github.com/sellisd/menzerath/actions)
+<!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -16,8 +21,8 @@ relationship between the size of a word (`y`) and its syllables (`x`).
 According to Menzerath’s law in its standard formulation the expected
 relationship should follow:
 
-\[ y = a \cdot x^b \cdot e^{-cx} \] where `a`, `b` and `c` are
-parameters of the law.
+*y* = *a* ⋅ *x*<sup>*b*</sup> ⋅ *e*<sup> − *c**x*</sup>
+where `a`, `b` and `c` are parameters of the law.
 
 ## Installation
 
@@ -49,9 +54,9 @@ First we load the library and have a look at the dataset
 library(tidyverse)
 #> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 #> ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-#> ✓ tibble  3.0.6     ✓ dplyr   1.0.3
+#> ✓ tibble  3.1.0     ✓ dplyr   1.0.4
 #> ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-#> ✓ readr   1.4.0     ✓ forcats 0.5.0
+#> ✓ readr   1.4.0     ✓ forcats 0.5.1
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
@@ -151,20 +156,20 @@ plot(BG_word_time_menzerath, fit=TRUE)
 Different mathematical formulations of Menzerath’s law have been
 proposed.
 
-| method name   | equation                                                           | parameters                | reference    |
-| ------------- | ------------------------------------------------------------------ | ------------------------- | ------------ |
-| simplified\_1 | \(y = ae^{-cx}\)                                                   | a, c                      | Altmann 1980 |
-| simplified\_2 | \(y = ax^b\)                                                       | a, b                      | Altmann 1980 |
-| MAL           | \(y = ax^be^{-cx}\)                                                | a, b, c                   | Altmann 1980 |
-| Milicka\_1    | \(L_{n-1} = a_nL_n^{-b_n}e^{c_nL_n}\)                              | \(a_n\), \(b_n\), \(c_n\) | Milicka 2014 |
-| Milicka\_2    | \(L_{n-1} = a_nL_n^{-b_n}\)                                        | \(a_n\), \(b_n\)          | Milicka 2014 |
-| Milicka\_4    | \(L_{n-1} = a_n + \frac{b_n}{L_n}\)                                | \(a_n\), \(b_n\)          | Milicka 2014 |
-| Milicka\_8    | \(L_{n-1} = a_n + \frac{b_n}{L_n} + \frac{c_n\min(1,L_n-1)}{L_n}\) | \(a_n\), \(b_n\), \(c_n\) | Milicka 2014 |
+| method name   | equation                                                                                                                                  | parameters                                              | reference    |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|--------------|
+| simplified\_1 | *y* = *a**e*<sup> − *c**x*</sup>                                                                                                          | a, c                                                    | Altmann 1980 |
+| simplified\_2 | *y* = *a**x*<sup>*b*</sup>                                                                                                                | a, b                                                    | Altmann 1980 |
+| MAL           | *y* = *a**x*<sup>*b*</sup>*e*<sup> − *c**x*</sup>                                                                                         | a, b, c                                                 | Altmann 1980 |
+| Milicka\_1    | *L*<sub>*n* − 1</sub> = *a*<sub>*n*</sub>*L*<sub>*n*</sub><sup> − *b*<sub>*n*</sub></sup>*e*<sup>*c*<sub>*n*</sub>*L*<sub>*n*</sub></sup> | *a*<sub>*n*</sub>, *b*<sub>*n*</sub>, *c*<sub>*n*</sub> | Milicka 2014 |
+| Milicka\_2    | *L*<sub>*n* − 1</sub> = *a*<sub>*n*</sub>*L*<sub>*n*</sub><sup> − *b*<sub>*n*</sub></sup>                                                 | *a*<sub>*n*</sub>, *b*<sub>*n*</sub>                    | Milicka 2014 |
+| Milicka\_4    | $L\_{n-1} = a\_n + \\frac{b\_n}{L\_n}$                                                                                                    | *a*<sub>*n*</sub>, *b*<sub>*n*</sub>                    | Milicka 2014 |
+| Milicka\_8    | $L\_{n-1} = a\_n + \\frac{b\_n}{L\_n} + \\frac{c\_n\\min(1,L\_n-1)}{L\_n}$                                                                | *a*<sub>*n*</sub>, *b*<sub>*n*</sub>, *c*<sub>*n*</sub> | Milicka 2014 |
 
 Note that methods Milicka\_1 and Milicka\_2 are identical to the
 classical Menzerath-Altman formulation (MAL) and simplified\_2
 correspondingly. The only difference besides notation is the parameter
-sign so \(b=-b_n\) and \(c=-c_n\).
+sign so *b* =  − *b*<sub>*n*</sub> and *c* =  − *c*<sub>*n*</sub>.
 
 In the classic example of syllable length of Indonesian morphemes Altman
 estimated a = 2.9603, b = -0.36853 and c = 0.04764. Using the same
@@ -214,17 +219,17 @@ and some more recent ones from Torre et al. 2019
 
 ### Datasets in package
 
-  - `morpheme_syllable`: Dataset from Altmann 1980 linking morpheme size
+-   `morpheme_syllable`: Dataset from Altmann 1980 linking morpheme size
     and syllable size.
-  - `word_syllable_phoneme`: Dataset from Altman 1980 on syllable length
+-   `word_syllable_phoneme`: Dataset from Altman 1980 on syllable length
     in English words.
-  - `word_syllable_time`: Dataset from Altman 1980 on syllable length in
+-   `word_syllable_time`: Dataset from Altman 1980 on syllable length in
     Bachka-German words.
-  - `BG_word_characters`: Dataset from Torre et al. 2019 linking breadth
+-   `BG_word_characters`: Dataset from Torre et al. 2019 linking breadth
     group size and average word size (in number of characters).
-  - `BG_word_phonemes`: Dataset from Torre et al. 2019 linking breadth
+-   `BG_word_phonemes`: Dataset from Torre et al. 2019 linking breadth
     group and average word size (in phonemes).
-  - `BG_word_time`: Dataset from Torre et al. 2019 linking breadth group
+-   `BG_word_time`: Dataset from Torre et al. 2019 linking breadth group
     and word size (in seconds).
 
 Further documentation and details about each dataset can be gained with
