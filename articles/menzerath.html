@@ -120,24 +120,68 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</span>
 <span class="co">#&gt; ✔ ggplot2 3.3.3     ✔ purrr   0.3.4</span>
-<span class="co">#&gt; ✔ tibble  3.1.0     ✔ stringr 1.4.0</span>
-<span class="co">#&gt; ✔ tidyr   1.1.2     ✔ forcats 0.5.1</span>
-<span class="co">#&gt; ✔ readr   1.4.0</span>
+<span class="co">#&gt; ✔ tibble  3.1.0     ✔ dplyr   1.0.4</span>
+<span class="co">#&gt; ✔ tidyr   1.1.2     ✔ stringr 1.4.0</span>
+<span class="co">#&gt; ✔ readr   1.4.0     ✔ forcats 0.5.1</span>
 <span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
 <span class="co">#&gt; ✖ dplyr::filter()     masks stats::filter()</span>
 <span class="co">#&gt; ✖ dplyr::group_rows() masks kableExtra::group_rows()</span>
 <span class="co">#&gt; ✖ dplyr::lag()        masks stats::lag()</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sellisd/menzerath">menzerath</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">morpheme_syllable</span><span class="op">)</span>
-<span class="va">morpheme_syllable</span>
-<span class="co">#&gt; # A tibble: 5 x 2</span>
-<span class="co">#&gt;       x     y</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1  3.1 </span>
-<span class="co">#&gt; 2     2  2.53</span>
-<span class="co">#&gt; 3     3  2.29</span>
-<span class="co">#&gt; 4     4  2.12</span>
-<span class="co">#&gt; 5     5  2.09</span></code></pre></div>
+<span class="fu">kbl</span><span class="op">(</span><span class="va">morpheme_syllable</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:right;">
+x
+</th>
+<th style="text-align:right;">
+y
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.53
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2.29
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2.12
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2.09
+</td>
+</tr>
+</tbody>
+</table>
 <p>We can transform the table to a menzerath object and create a plot:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/menzerath.html">menzerath</a></span><span class="op">(</span><span class="va">morpheme_syllable</span><span class="op">)</span>
@@ -301,7 +345,7 @@
 <code class="sourceCode R"><span class="va">annotated_text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Greece* {which* is* the* most* beau*ti*ful* coun*try*"</span>,
                          <span class="st">" +I* know* +}was* the* first* place* +we* vi*si*ted* in*"</span>,
                          <span class="st">"Eu*ro*pe* +."</span><span class="op">)</span>
-<span class="va">counts_df</span> <span class="op">&lt;-</span> <span class="fu">process_text</span><span class="op">(</span><span class="va">annotated_text</span>, <span class="st">"+"</span>, <span class="st">" "</span>, <span class="st">"*"</span>, <span class="st">"{"</span>, <span class="st">"}"</span><span class="op">)</span>
+<span class="va">counts_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/process_text.html">process_text</a></span><span class="op">(</span><span class="va">annotated_text</span>, <span class="st">"+"</span>, <span class="st">" "</span>, <span class="st">"*"</span>, <span class="st">"{"</span>, <span class="st">"}"</span><span class="op">)</span>
 <span class="fu">kbl</span><span class="op">(</span><span class="va">counts_df</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>

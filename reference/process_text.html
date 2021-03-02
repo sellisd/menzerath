@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • menzerath</title>
+<title>Process annotated text — process_text • menzerath</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Process annotated text — process_text" />
+<meta property="og:description" content="Process annotated text" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,102 +121,66 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Process annotated text</h1>
+    <small class="dont-index">Source: <a href='https://github.com/sellisd/menzerath/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
+    <div class="hidden name"><code>process_text.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Process annotated text</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>process_text</span><span class='op'>(</span>
+  <span class='va'>text</span>,
+  <span class='va'>construct_delimiter</span>,
+  <span class='va'>constituent_delimiter</span>,
+  <span class='va'>subconstituent_delimiter</span>,
+  <span class='va'>discontinued_constituent_delimiter_begin</span>,
+  <span class='va'>discontinued_constituent_delimiter_end</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="BG_word_characters.html">BG_word_characters</a></code> </p>
-        </td>
-        <td><p>Words in breath groups.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="BG_word_phonemes.html">BG_word_phonemes</a></code> </p>
-        </td>
-        <td><p>Words in breath groups.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="BG_word_time.html">BG_word_time</a></code> </p>
-        </td>
-        <td><p>Words in breath groups.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dmenzerath.html">dmenzerath()</a></code> </p>
-        </td>
-        <td><p>Density function for Menzerath-Altmann law</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fit.menzerath.html">fit(<i>&lt;menzerath&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Fit a menzerath object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_parameters.html">get_parameters()</a></code> </p>
-        </td>
-        <td><p>Return parameters of the Menzerath-Altmann law.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="menzerath.html">menzerath()</a></code> </p>
-        </td>
-        <td><p>A class to describe and plot data following the Menzerath-Altman law</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="morpheme_syllable.html">morpheme_syllable</a></code> </p>
-        </td>
-        <td><p>Syllable length of Indonesian morphemes.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="process_text.html">process_text()</a></code> </p>
-        </td>
-        <td><p>Process annotated text</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="word_syllable_phoneme.html">word_syllable_phoneme</a></code> </p>
-        </td>
-        <td><p>Syllable length in English words.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="word_syllable_time.html">word_syllable_time</a></code> </p>
-        </td>
-        <td><p>Syllable length in Bachka-German words.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>text</th>
+      <td><p>string</p></td>
+    </tr>
+    <tr>
+      <th>construct_delimiter</th>
+      <td><p>char</p></td>
+    </tr>
+    <tr>
+      <th>constituent_delimiter</th>
+      <td><p>char</p></td>
+    </tr>
+    <tr>
+      <th>subconstituent_delimiter</th>
+      <td><p>char</p></td>
+    </tr>
+    <tr>
+      <th>discontinued_constituent_delimiter_begin</th>
+      <td><p>char</p></td>
+    </tr>
+    <tr>
+      <th>discontinued_constituent_delimiter_end</th>
+      <td><p>char</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>data.frame A data.frame with three columns: constituents, subconstituents and constructs</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>annotated_text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Greece* {which* is* the* most* beau*ti*ful* coun*try*"</span>,
+                        <span class='st'>" +I* know* +}was* the* first* place* +we* vi*si*ted* in*"</span>,
+                        <span class='st'>"Eu*ro*pe* +."</span><span class='op'>)</span>
+ <span class='va'>counts_df</span> <span class='op'>&lt;-</span> <span class='fu'>process_text</span><span class='op'>(</span><span class='va'>annotated_text</span>, <span class='st'>"+"</span>, <span class='st'>" "</span>, <span class='st'>"*"</span>, <span class='st'>"{"</span>, <span class='st'>"}"</span><span class='op'>)</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
