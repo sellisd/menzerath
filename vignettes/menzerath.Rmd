@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(kableExtra)
-library(dplyr)
 ```
 
 ## Introduction
@@ -47,7 +46,7 @@ First we load the library and have a look at the dataset
 library(tidyverse)
 library(menzerath)
 data(morpheme_syllable)
-morpheme_syllable
+kbl(morpheme_syllable)
 ```
 We can transform the table to a menzerath object and create a plot:
 
@@ -171,8 +170,13 @@ In the `menzerath` package a number of datasets are included in the form of tibb
 
 Further documentation and details about each dataset can be gained with the `help` command, e.g:
 
-```{r}
+```{r, show_help, eval=FALSE}
 help(morpheme_syllable)
+```
+```{r, print_help, include=FALSE}
+library(menzerath)
+helptext <- help(morpheme_syllable)
+tools:::Rd2txt(utils:::.getHelpFile(as.character(helptext)))
 ```
 
 ## References

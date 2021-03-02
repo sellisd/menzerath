@@ -7,11 +7,11 @@
 \method{fit}{menzerath}(object, method = "MAL", ...)
 }
 \arguments{
-\item{object}{}
+\item{object}{a menzerath type object}
 
 \item{method}{string Method to perform the fitting, could be one of MAL, simplified_1, simplified_2, Milicka_1, Milicka_2, Milicka_4 or Milicka_8}
 
-\item{...}{}
+\item{...}{Other arguments passed to lm}
 }
 \description{
 Fit a menzerath object

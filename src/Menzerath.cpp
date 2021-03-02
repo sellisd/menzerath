@@ -84,6 +84,21 @@ private:
   }
 };
 
+
+//' Process annotated text
+//'
+//' @param text string
+//' @param construct_delimiter char
+//' @param constituent_delimiter char
+//' @param subconstituent_delimiter char
+//' @param discontinued_constituent_delimiter_begin char
+//' @param discontinued_constituent_delimiter_end char
+//' @return data.frame A data.frame with three columns: constituents, subconstituents and constructs
+//' @examples
+//' annotated_text <- paste0("Greece* {which* is* the* most* beau*ti*ful* coun*try*",
+//'                         " +I* know* +}was* the* first* place* +we* vi*si*ted* in*",
+//'                         "Eu*ro*pe* +.")
+//'  counts_df <- process_text(annotated_text, "+", " ", "*", "{", "}")
 //' @export
 // [[Rcpp::export]]
 DataFrame process_text(std::string text,

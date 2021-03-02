@@ -5,7 +5,7 @@ Version: 0.1.2
 Authors@R: person("Diamantis", "Sellis", email = "sellisd@gmail.com",
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-4059-5507"))
-Description: Explore data following the Menzerath-Altmann law.
+Description: Explore Data Following The Menzerath-Altmann Law.
 Encoding: UTF-8
 License: GPL-3
 LazyData: true
@@ -21,7 +21,10 @@ Imports:
 Depends: 
     R (>= 3.5.0)
 biocViews:
-Suggests: 
+Suggests:
+    utils,
+    tools,
+    remotes,
     knitr,
     rmarkdown,
     cowplot,

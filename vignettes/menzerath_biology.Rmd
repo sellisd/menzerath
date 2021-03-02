@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+remotes::install_bioc("biomaRt")
 ```
 
 ```{r, setup, include=FALSE}
@@ -129,6 +130,8 @@ plot_grid(yeast_plot, human_plot, mouse_plot, cow_plot, ncol = 2)
 | human   | _H. sapiens_    | `hsapiens_gene_ensembl`    | 52,351                 |
 | mouse   | _M. musculus_   | `mmusculus_gene_ensembl`   | 43,864                 |
 | cow     | _B. taurus_     | `btaurus_gene_ensembl`     | 42,022                 |
+
+
 
 ![Menzerath's law in multiple genomes](menzerath_biology_files/exons_menzerath.png)
 
