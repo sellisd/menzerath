@@ -41,6 +41,51 @@ public:
     }
   }
 
+
+  int valid_annotations()
+  {
+    //return 1 when discontinued constituent delimiters are not balanced
+    //return 2 when a construct delimiter is not after a constituent and a subconstituent delimiter
+    //return 3 when a constituent delimiter is not after a subconstituent delimiter
+    int stack = 0;
+    char lag1 = '\0';
+    char lag2 = '\0';
+    IntegerVector error_location;
+    for(int i = 0 ; i < text.length(); i++)
+    {
+      if(text[i] == discontinued_constituent_delimiter_begin){
+        stack++;
+      }else if(text[i] == discontinued_constituent_delimiter_end){
+        stack--;
+        if(stack < 0)
+        {
+          return 1;
+        }
+      }else if(text[i] == construct_delimiter){
+        if(lag1 != constituent_delimiter || lag2 != subconstituent_delimiter)
+        {
+          return 2;
+        }
+      }else if(text[i] == constituent_delimiter){
+        if(lag1 != subconstituent_delimiter)
+        {
+          return 3;
+        }
+      }
+      lag2 = lag1;
+      lag1 = text[i];
+    }
+    if(stack == 0)
+    {
+      return 0;
+    }
+    else
+    {
+      return 1;
+    }
+    return 0;
+  }
+
   void calculate_menzerath()
   {
     int start = 0;
@@ -114,10 +159,16 @@ DataFrame process_text(std::string text,
                                                              subconstituent_delimiter,
                                                              discontinued_constituent_delimiter_begin,
                                                              discontinued_constituent_delimiter_end);
+  int validation_result = annotated_text_instance->valid_annotations();
+  if( validation_result != 0){
+    return DataFrame::create(Named("Errors") = validation_result);
+  }
   annotated_text_instance->calculate_menzerath();
   DataFrame result = DataFrame::create(Named("constituents") = annotated_text_instance->constituents_in_construct,
                                        Named("subconstituents") = annotated_text_instance->subconstituents_in_construct,
                                        Named("constructs") = annotated_text_instance->constructs);
   delete annotated_text_instance;
   return result;
+
+
 }
