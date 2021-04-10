@@ -1,6 +1,6 @@
 Package: menzerath
 Type: Package
-Title: Explore data following the Menzerath-Altmann law
+Title: Explore Data Following The Menzerath-Altmann Law
 Version: 0.1.2
 Authors@R: person("Diamantis", "Sellis", email = "sellisd@gmail.com",
                   role = c("aut", "cre"),

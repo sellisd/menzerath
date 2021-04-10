@@ -10,7 +10,9 @@ datasets_list <- lapply(paste0("data-raw/",metadata$file), read_csv)
 
 for(i in 1:length(datasets_list)){
   assign(metadata$name[i], datasets_list[[i]])
-  save(list = metadata$name[i], file = paste0("data/",metadata$name[i],".rda"))
+  save(list = metadata$name[i],
+       file = paste0("data/",metadata$name[i],".rda"),
+       compress = 'xz')
 }
 
 # Create object documentation
