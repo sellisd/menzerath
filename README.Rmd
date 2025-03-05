@@ -3,8 +3,8 @@ output: github_document
 ---
 <!-- badges: start -->
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sellisd/menzerath)
-[![R-CMD-check](https://github.com/sellisd/menzerath/workflows/R-CMD-check/badge.svg)](https://github.com/sellisd/menzerath/actions)
 [![R-CMD-check](https://github.com/sellisd/menzerath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sellisd/menzerath/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/sellisd/menzerath/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/sellisd/menzerath/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
   
   
